@@ -1,0 +1,40 @@
+# Run unit tests
+name: terraform-build
+#description: To perform terraform build
+#author: Karthick Dharman.
+# Triggers the workflow on all push or pull request events
+on: [push, pull_request]
+# The jobs that we will beed to run terraform
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
+      - name: Checkout Codebase
+        uses: actions/checkout@v2
+      
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: '1.1.2'
+      
+      - name: terraform fmt
+        run: terraform fmt
+      
+      - name: terraform init
+        run: terraform init --input=false
+      
+      - name: terraform format
+        run: terraform fmt -check
+      
+      - name: terraform validate
+        run: terraform validate
+      
+      - name: terraform scan
+        uses: accurics/terrascan-action@main
+        with:
+          iac_type: 'terraform'

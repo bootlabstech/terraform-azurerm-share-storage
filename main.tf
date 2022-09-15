@@ -1,29 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.93.0"
-    }
-  }
-    #backend "azurerm" {
-    #resource_group_name  = "IAAC"
-    #storage_account_name = "infracodeterraform"
-    #container_name       = "tfstate"
-    #key                  = "doapp/doapp_31_35.tfstate"
-    #access_key = "__storagekey__"
-  #}
-}
-
-# Configure the Azure Provider
-provider "azurerm" {
-  # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
-  #subscription_id = "9fcc9c96–8044–XXXX-XXXX–XXXXXXXXXXXX"
-  #client_id = "97545937–XXXX–XXXX-XXXX-XXXXXXXXXXXX"
-  #client_secret = ".3GGR_XXXXX~XXXX-XXXXXXXXXXXXXXXX"
-  #tenant_id = "73d20f0d-XXXX–XXXX–XXXX-XXXXXXXXXXXX"
-  #  version = "2.81.0"
-  features {}
-}
 # Create a resource group
 resource "azurerm_resource_group" "bootlab_rg" {
   count    = length(var.resource_prefix)
